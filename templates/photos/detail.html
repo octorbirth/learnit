@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="col-md-12">
+            <h1>{{ photo.pk }}번 사진 보여줄게요</h1>
+            <h3>주소는 {{ photo.image.url|truncatechars:40 }}</h3>
+            <img src="{{ photo.image.url }}" class="img-thumbnail"/>
+            <form method="POST" action="{% url 'photos:delete' %}" class="form-group">
+                {% csrf_token %}
+                <input type="hidden" name="photo_id" value="{{ photo.pk }}">
+                <button class="btn btn-default btn-block" type="submit">삭제</button>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}
